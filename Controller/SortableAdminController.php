@@ -23,6 +23,13 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  */
 class SortableAdminController extends CRUDController
 {
+    private $translator;
+
+    public function setTranslator($translator)
+    {
+        $this->translator = $translator;
+    }
+    
     /**
      * Move element
      *
@@ -36,7 +43,7 @@ class SortableAdminController extends CRUDController
         PositionHandler $positionHandler
     ): Response
     {
-        $translator = $this->get('translator');
+        $translator = $this->translator;
 
         if (!$this->admin->isGranted('EDIT')) {
             $this->addFlash(
